@@ -1,0 +1,60 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{% block main %}
+    {{ form(form) }}
+
+    <h3>Statistiques</h3>
+
+    <table class="table-responsive" style="border:1px solid black;">
+        <thead>
+            <th>Date</th>
+            <th>Nombre impression</th>
+        </thead>
+        <tbody>
+            {% for date,number in statistics %}
+                <tr style="border:1px solid black;">
+                    <td style="border:1px solid black;">{{ date }}</td>
+                    <td style="border:1px solid black;">{{ number }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div id="chart_div"></div>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {packages: ['corechart', 'bar']});
+        google.charts.setOnLoadCallback(drawBasic);
+
+        function drawBasic() {
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('timeofday', 'Date');
+            data.addColumn('number', 'Nombre impressions');
+
+            data.addRows([
+                {% for date,number in statistics %}
+                [{v: [8, 0, 0], f: '{{ date }}'}, {{ number }}],
+                {% endfor %}
+            ]);
+
+            var options = {
+                title: 'Nombre impression par jour',
+                hAxis: {
+                    title: 'Jour',
+                },
+                vAxis: {
+                    title: 'Impressions'
+                }
+            };
+
+            var chart = new google.visualization.ColumnChart(
+                document.getElementById('chart_div'));
+
+            chart.draw(data, options);
+        }
+    </script>
+
+{% endblock %}
