@@ -27,7 +27,7 @@ class RedirectUriController extends AbstractController
         $statistic = new Statistic();
         $statistic->setUri($uri);
         $statistic->setDate(new \DateTime());
-        $statistic->setIp($_SERVER['REMOTE_ADDR']);
+        $statistic->setIp($_SERVER['REMOTE_ADDR'] . ";" . gethostbyaddr($_SERVER["REMOTE_ADDR"]));
 
         $entityManager->persist($statistic);
         $entityManager->flush();
