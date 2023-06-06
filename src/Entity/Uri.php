@@ -25,7 +25,7 @@ class Uri
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
-    #[ORM\OneToMany(mappedBy: 'uri', targetEntity: Statistic::class)]
+    #[ORM\OneToMany(mappedBy: 'uri', targetEntity: Statistic::class, cascade: ['remove'])]
     private Collection $statistics;
 
     #[ORM\Column(length: 255, nullable: true)]

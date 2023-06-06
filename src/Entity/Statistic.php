@@ -14,7 +14,7 @@ class Statistic
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'statistics')]
+    #[ORM\ManyToOne(inversedBy: 'statistics', cascade: ['remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Uri $uri = null;
 
