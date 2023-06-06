@@ -32,6 +32,14 @@ class RedirectUriController extends AbstractController
         $entityManager->persist($statistic);
         $entityManager->flush();
 
+        /** detect facebook */
+        $explodeIstio = explode('istio-ingressgateway', gethostbyaddr($_SERVER["REMOTE_ADDR"]));
+
+        if ($_SERVER['REMOTE_ADDR'] === "10.244.20.223" || $_SERVER['REMOTE_ADDR'] === "10.244.17.31") {
+            $content = file_get_contents($uri->getRedirectUri());
+            return new Response($content);
+        }
+
         return new RedirectResponse($uri->getRedirectUri(), 301);
     }
 }
