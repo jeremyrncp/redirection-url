@@ -36,7 +36,29 @@ class RedirectUriController extends AbstractController
         $explodeIstio = explode('istio-ingressgateway', gethostbyaddr($_SERVER["REMOTE_ADDR"]));
 
         if ($_SERVER['REMOTE_ADDR'] === "10.244.20.223" || $_SERVER['REMOTE_ADDR'] === "10.244.17.31") {
-            $content = file_get_contents($uri->getRedirectUri());
+            $content = '
+            <!doctype html>
+                <html class="no-js" lang="fr">
+                <head>
+                <meta charset="utf-8" />
+                <meta content="'. $uri->getTitle() . '" name="description" />
+                <meta content="'. $uri->getRedirectUri() . '" property="og:url" />
+                <meta content="article" property="og:type" />
+                <meta content="https://my-mms.me" property="og:site_name" />
+                <meta content="'. $uri->getTitle() . '" property="og:title" />
+                <meta content="'. $uri->getTitle() . '" property="og:description" />
+                <meta content="'. $uri->getImage() . '" property="og:image" />
+                <meta content="fr_FR" property="og:locale" />
+                <meta content="1200" property="og:image:width" />
+                <meta content="630" property="og:image:height" />
+                <meta content="noarchive" name="robots" />
+                <meta name="theme-color" content="#353535" />
+                
+                </head>
+                <body>
+                    <h1>' . $uri->getTitle() . '</h1>
+                </body>
+                </html>';
             return new Response($content);
         }
 

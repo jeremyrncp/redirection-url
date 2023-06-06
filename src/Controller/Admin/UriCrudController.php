@@ -24,6 +24,8 @@ class UriCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('baseUri'),
             TextField::new('redirectUri'),
+            TextField::new('title'),
+            TextField::new('image'),
             DateField::new('date')
         ];
     }
