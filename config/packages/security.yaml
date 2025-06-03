@@ -1,5 +1,4 @@
 security:
-    enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
@@ -8,7 +7,7 @@ security:
             users_in_memory:
                 memory:
                     users:
-                        admin: { password: '$2y$15$IDAV1JcPgRGx.B2HJ5/LSO2rfNhosfml2pWk.DRN.qUQceFe89aYG', roles: [ 'ROLE_ADMIN', 'ROLE_USER' ] }
+                        admin: { password: '$2y$13$/Mr.nJcwVK45Cy4ZyCo5Be5V/QLl/Lx9snBEtG7uXdmAg6xggBpHS', roles: [ 'ROLE_ADMIN', 'ROLE_USER' ] }
 
     firewalls:
         dev:

@@ -92,6 +92,18 @@
             "./.env"
         ]
     },
+    "symfony/form": {
+        "version": "7.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "7.2",
+            "ref": "7d86a6723f4a623f59e2bf966b6aad2fc461d36b"
+        },
+        "files": [
+            "config/packages/csrf.yaml"
+        ]
+    },
     "symfony/framework-bundle": {
         "version": "5.4",
         "recipe": {
@@ -119,6 +131,18 @@
             "version": "1.0",
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
+    },
+    "symfony/property-info": {
+        "version": "7.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "7.3",
+            "ref": "dae70df71978ae9226ae915ffd5fad817f5ca1f7"
+        },
+        "files": [
+            "config/packages/property_info.yaml"
+        ]
     },
     "symfony/routing": {
         "version": "5.4",
@@ -170,5 +194,41 @@
             "./config/packages/twig.yaml",
             "./templates/base.html.twig"
         ]
+    },
+    "symfony/uid": {
+        "version": "7.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "7.0",
+            "ref": "0df5844274d871b37fc3816c57a768ffc60a43a5"
+        }
+    },
+    "symfony/ux-twig-component": {
+        "version": "2.25",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.13",
+            "ref": "9b627037a510e20eddb559e06050a34854ce51d6"
+        },
+        "files": [
+            "config/packages/twig_component.yaml"
+        ]
+    },
+    "symfony/validator": {
+        "version": "7.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "7.0",
+            "ref": "8c1c4e28d26a124b0bb273f537ca8ce443472bfd"
+        },
+        "files": [
+            "config/packages/validator.yaml"
+        ]
+    },
+    "twig/extra-bundle": {
+        "version": "v3.21.0"
     }
 }
