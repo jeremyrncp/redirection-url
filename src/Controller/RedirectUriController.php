@@ -24,6 +24,8 @@ class RedirectUriController extends AbstractController
             throw new InvalidArgumentException("Slug is invalid");
         }
 
+        $uri->setClic($uri->getClic()+1);
+
         $statistic = new Statistic();
         $statistic->setUri($uri);
         $statistic->setDate(new \DateTime());

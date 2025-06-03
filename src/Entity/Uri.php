@@ -41,6 +41,9 @@ class Uri
     #[ORM\JoinColumn(nullable: false)]
     private ?Domain $domain = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $clic = null;
+
     public function __construct()
     {
         $this->statistics = new ArrayCollection();
@@ -166,6 +169,18 @@ class Uri
     public function setDomain(?Domain $domain): static
     {
         $this->domain = $domain;
+
+        return $this;
+    }
+
+    public function getClic(): ?int
+    {
+        return $this->clic;
+    }
+
+    public function setClic(?int $clic): static
+    {
+        $this->clic = $clic;
 
         return $this;
     }

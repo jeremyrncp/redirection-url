@@ -11,7 +11,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UriCrudController extends AbstractCrudController
 {
@@ -29,7 +31,8 @@ class UriCrudController extends AbstractCrudController
             TextField::new('redirectUri'),
             TextField::new('title'),
             TextField::new('description'),
-            ImageField::new('image')->setUploadDir("public/images/")->setBasePath("/images/"),
+            ImageField::new('image')->setUploadDir("public/images/")->setBasePath("/images/")->setUploadedFileNamePattern(fn(UploadedFile $file) => sprintf('upload_%d_%s.%s', random_int(1, 999), uniqid(), $file->guessExtension())),
+            NumberField::new("clic")->hideOnForm(),
             DateField::new('date')
         ];
     }
