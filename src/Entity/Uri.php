@@ -122,7 +122,7 @@ class Uri
 
     public function __toString(): string
     {
-        return $this->baseUri;
+        return $this->domain->getName() . "/" . $this->baseUri;
     }
 
     public function getTitle(): ?string
