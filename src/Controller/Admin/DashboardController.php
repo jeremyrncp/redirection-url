@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Domain;
 use App\Entity\Statistic;
 use App\Entity\Uri;
 use App\Form\UriType;
@@ -63,6 +64,14 @@ class DashboardController extends AbstractDashboardController
         return $dataFiltered;
     }
 
+    #[Route('/admin/viewlink/{id}', name: 'app_redirect_uri_view')]
+    public function redirectView(Uri $uri): Response
+    {
+        return $this->render('admin_view_uri.html.twig', [
+            'link' => "http://" . $uri->getDomain()->getName() . "/" . $uri->getBaseUri()
+        ]);
+    }
+
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
@@ -73,6 +82,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Statistics', 'fas fa-list', Statistic::class);
+        yield MenuItem::linkToCrud('Domains', 'fas fa-list', Domain::class);
         yield MenuItem::linkToCrud('URLs', 'fas fa-list', Uri::class);
     }
 }

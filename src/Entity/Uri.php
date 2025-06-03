@@ -34,6 +34,13 @@ class Uri
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $description = null;
+
+    #[ORM\ManyToOne(inversedBy: 'uris')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Domain $domain = null;
+
     public function __construct()
     {
         $this->statistics = new ArrayCollection();
@@ -135,6 +142,30 @@ class Uri
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getDomain(): ?Domain
+    {
+        return $this->domain;
+    }
+
+    public function setDomain(?Domain $domain): static
+    {
+        $this->domain = $domain;
 
         return $this;
     }

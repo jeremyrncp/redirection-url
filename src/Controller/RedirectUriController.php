@@ -41,13 +41,13 @@ class RedirectUriController extends AbstractController
                 <html class="no-js" lang="fr">
                 <head>
                 <meta charset="utf-8" />
-                <meta content="'. $uri->getTitle() . '" name="description" />
+                <meta content="'. $uri->getDescription() . '" name="description" />
                 <meta content="'. $uri->getRedirectUri() . '" property="og:url" />
                 <meta content="article" property="og:type" />
-                <meta content="https://my-mms.me" property="og:site_name" />
+                <meta content="http://' . $uri->getDomain()->getName() . '" property="og:site_name" />
                 <meta content="'. $uri->getTitle() . '" property="og:title" />
-                <meta content="'. $uri->getTitle() . '" property="og:description" />
-                <meta content="'. $uri->getImage() . '" property="og:image" />
+                <meta content="'. $uri->getDescription() . '" property="og:description" />
+                <meta content="' . $_ENV["URL_FRONT"] . "/images/" . $uri->getImage() . '" property="og:image" />
                 <meta content="fr_FR" property="og:locale" />
                 <meta content="1200" property="og:image:width" />
                 <meta content="630" property="og:image:height" />
@@ -57,6 +57,7 @@ class RedirectUriController extends AbstractController
                 </head>
                 <body>
                     <h1>' . $uri->getTitle() . '</h1>
+                    <p>' . $uri->getDescription() . '</p>
                 </body>
                 </html>';
             return new Response($content);

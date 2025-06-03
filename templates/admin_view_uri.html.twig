@@ -1,0 +1,22 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block main %}
+<h1>Lien de visualisation</h1>
+<div class="alert alert-info">
+    {{ link }}<br />
+    <button onclick="copierTexte()">Copier</button>
+</div>
+<input type="hidden" id="uri" value="{{ link }}" />
+    <script>
+    function copierTexte() {
+      const texte = document.getElementById('uri').value;
+      navigator.clipboard.writeText(texte)
+      .then(() => {
+        alert("Texte copié !");
+      })
+      .catch(err => {
+        alert("Erreur lors de la copie : " + err);
+      });
+    }
+    </script>
+{% endblock %}
