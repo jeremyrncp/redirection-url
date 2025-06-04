@@ -6,22 +6,23 @@ use App\Entity\Statistic;
 use App\Entity\Uri;
 use App\Repository\UriRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use http\Exception\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class RedirectUriController extends AbstractController
 {
     #[Route('/{slug}', name: 'app_redirect_uri')]
-    public function index(string $slug, UriRepository $uriRepository, EntityManagerInterface $entityManager): Response
+    public function index(string $slug, UriRepository $uriRepository, EntityManagerInterface $entityManager, Request $request): Response
     {
         /** @var Uri $uri */
-        $uri = $uriRepository->findOneBy(['baseUri' => $slug]);
+        $uri = $uriRepository->findByDomainAndSlug($request->getHost(), $slug);
 
         if (is_null($uri)) {
-            throw new InvalidArgumentException("Slug is invalid");
+            throw new NotFoundHttpException("Slug is invalid");
         }
 
         $uri->setClic($uri->getClic()+1);

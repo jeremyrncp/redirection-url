@@ -39,6 +39,19 @@ class UriRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function findByDomainAndSlug(string $domainName, string $slug)
+    {
+        return $this->createQueryBuilder("u")
+            ->innerJoin("u.domain", "d")
+            ->andWhere("d.name = :domainName")
+            ->andWhere("u.baseUri = :slug")
+            ->setParameter("domainName", $domainName)
+            ->setParameter("slug", $slug)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
 //    /**
 //     * @return Uri[] Returns an array of Uri objects
 //     */
