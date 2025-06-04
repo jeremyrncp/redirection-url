@@ -23,6 +23,7 @@ class DashboardController extends AbstractDashboardController
     ) {
     }
 
+    #[Route('/admin')]
     public function index(): Response
     {
         $statistics = null;
@@ -81,7 +82,7 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToRoute('Dashboard', 'fa fa-home', 'app_admin_dashboard_index');
+        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Statistics', 'fas fa-list', Statistic::class);
         yield MenuItem::linkToCrud('Domains', 'fas fa-list', Domain::class);
         yield MenuItem::linkToCrud('URLs', 'fas fa-list', Uri::class);
