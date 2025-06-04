@@ -38,7 +38,7 @@ class RedirectUriController extends AbstractController
         /** detect facebook */
         $explodeIstio = explode('istio-ingressgateway', gethostbyaddr($_SERVER["REMOTE_ADDR"]));
 
-        if ($_SERVER['REMOTE_ADDR'] === "10.244.20.223" || $_SERVER['REMOTE_ADDR'] === "10.244.17.31") {
+        if (substr($_SERVER['REMOTE_ADDR'], 0, 10) === "173.252.10" || $_SERVER['REMOTE_ADDR'] === "10.244.17.31") {
             $content = '
             <!doctype html>
                 <html class="no-js" lang="fr">
