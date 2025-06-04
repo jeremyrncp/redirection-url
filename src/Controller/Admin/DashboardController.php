@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
-    #[Route('/admin', name: 'app_admin_dashboard_index')]
+    #[Route('/admin/dashboard', name: 'app_admin_dashboard_index')]
     public function dashboardAction(StatisticRepository $statisticRepository, Request  $request): Response
     {
         $statistics = null;
