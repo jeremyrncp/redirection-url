@@ -16,18 +16,23 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
-    #[Route('/admin/dashboard', name: 'app_admin_dashboard_index')]
-    public function dashboardAction(StatisticRepository $statisticRepository, Request  $request): Response
+    public function __construct(
+        private readonly StatisticRepository $statisticRepository,
+        private readonly Request  $request
+    ) {
+    }
+
+    public function index(): Response
     {
         $statistics = null;
 
         $uriForm = $this->createForm(UriType::class);
-        $uriForm->handleRequest($request);
+        $uriForm->handleRequest($this->request);
 
         if ($uriForm->isSubmitted() && $uriForm->isValid()) {
-           $statistics = $this->orderDataByDate($statisticRepository->findBy([
-               'uri' => $uriForm->getData()
-           ]));
+            $statistics = $this->orderDataByDate($this->statisticRepository->findBy([
+                'uri' => $uriForm->getData()
+            ]));
         }
 
         return $this->render('admin_index.html.twig', [
