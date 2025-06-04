@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -18,7 +19,7 @@ class DashboardController extends AbstractDashboardController
 {
     public function __construct(
         private readonly StatisticRepository $statisticRepository,
-        private readonly Request  $request
+        private readonly RequestStack $requestStack,
     ) {
     }
 
@@ -27,7 +28,7 @@ class DashboardController extends AbstractDashboardController
         $statistics = null;
 
         $uriForm = $this->createForm(UriType::class);
-        $uriForm->handleRequest($this->request);
+        $uriForm->handleRequest($this->requestStack->getCurrentRequest());
 
         if ($uriForm->isSubmitted() && $uriForm->isValid()) {
             $statistics = $this->orderDataByDate($this->statisticRepository->findBy([
