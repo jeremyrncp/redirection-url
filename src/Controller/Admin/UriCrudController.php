@@ -27,13 +27,13 @@ class UriCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             AssociationField::new('domain'),
-            TextField::new('baseUri'),
+            TextField::new('baseUri')->hideOnForm(),
             TextField::new('redirectUri'),
             TextField::new('title'),
             TextField::new('description'),
             ImageField::new('image')->setUploadDir("public/images/")->setBasePath("/images/")->setUploadedFileNamePattern(fn(UploadedFile $file) => sprintf('upload_%d_%s.%s', random_int(1, 999), uniqid(), $file->guessExtension())),
             NumberField::new("clic")->hideOnForm(),
-            DateField::new('date')
+            DateField::new('date')->hideOnForm()
         ];
     }
 

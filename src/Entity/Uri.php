@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\UriRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UriRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Uri
 {
     #[ORM\Id]
@@ -183,5 +185,14 @@ class Uri
         $this->clic = $clic;
 
         return $this;
+    }
+
+    #[ORM\PrePersist]
+    public function onPrePersist(): void
+    {
+        $this->date = new \DateTime();
+
+        $slugify = new Slugify();
+        $this->baseUri = $slugify->slugify($this->title);
     }
 }

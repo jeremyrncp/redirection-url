@@ -8,6 +8,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-intl": "*",
+        "cocur/slugify": "^4.6",
         "doctrine/annotations": "^2.0.2",
         "doctrine/doctrine-bundle": "^2.9",
         "doctrine/doctrine-migrations-bundle": "^3.2",
