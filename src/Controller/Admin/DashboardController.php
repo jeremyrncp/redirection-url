@@ -70,7 +70,7 @@ class DashboardController extends AbstractDashboardController
     public function redirectView(Uri $uri): Response
     {
         return $this->render('admin_view_uri.html.twig', [
-            'link' => "http://" . $uri->getDomain()->getName() . "/" . $uri->getBaseUri()
+            'link' => "https://" . $uri->getDomain()->getName() . "/" . $uri->getBaseUri()
         ]);
     }
 

@@ -13,3 +13,5 @@ Rediriger les noms de domaine A vers l'IP du serveur
 Tous les domaines doivent pouvoir être redirigés.
 
 Accéder à la route /admin pour pouvoir gérer l'application
+
+certbot --apache -d touteslesactus.fr -d www.touteslesactus.fr
